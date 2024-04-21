@@ -51,7 +51,10 @@
         ];
 
         window.onload = () => {
-
+            const boardDiv = document.querySelector("#board");
+            for(i=0; i<13; i++) {
+                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/back.png>`);
+            }
         }
 
         reroll = () => {
@@ -85,8 +88,8 @@
             boardDiv.innerHTML = "";
 
             tileArr.forEach((tile) => {
-                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/${tileImgList[tile]}>`)
-            })
+                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/${tileImgList[tile]}>`);
+            });
         }
     </script>
 </head>
