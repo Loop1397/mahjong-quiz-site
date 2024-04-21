@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script>
+        /**
+        * 마작 패 리스트
+        * 0~8 : 만
+        * 9~17 : 통
+        * 18~26 : 삭
+        * 27~33 : 동, 남, 서, 북, 백, 발, 중
+        */
+        const tileImgList = [
+            "1m.png",
+            "2m.png",
+            "3m.png",
+            "4m.png",
+            "5m.png",
+            "6m.png",
+            "7m.png",
+            "8m.png",
+            "9m.png",
+            "1p.png",
+            "2p.png",
+            "3p.png",
+            "4p.png",
+            "5p.png",
+            "6p.png",
+            "7p.png",
+            "8p.png",
+            "9p.png",
+            "1s.png",
+            "2s.png",
+            "3s.png",
+            "4s.png",
+            "5s.png",
+            "6s.png",
+            "7s.png",
+            "8s.png",
+            "9s.png",
+            "1z.png",
+            "2z.png",
+            "3z.png",
+            "4z.png",
+            "5z.png",
+            "6z.png",
+            "7z.png"
+        ];
+
+        window.onload = () => {
+
+        }
+
+        reroll = () => {
+            const tileArr = new Array();
+            const currentDeck = Array.from({length: 34}, () => 0);
+
+            console.log("reroll!!");
+
+            let i = 0;
+            while (i < 13) {
+                let draw = getRandomInteger(34)
+
+                if (currentDeck[draw] < 4) {
+                    currentDeck[draw] += 1;
+                    i += 1;
+                    tileArr.push(draw);
+                }
+            }
+
+            printDeck(tileArr.toSorted((a, b) => a-b));
+        }
+
+        // 0~ max-1 사이의 정수를 랜덤으로 가져오는 함수
+        getRandomInteger = (max) => {
+            const result = Math.floor(Math.random() * max);
+            return result;
+        }
+
+        printDeck = (tileArr) => {
+            const boardDiv = document.querySelector("#board");
+            boardDiv.innerHTML = "";
+
+            tileArr.forEach((tile) => {
+                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/${tileImgList[tile]}>`)
+            })
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <div id="board">
+        </div>
+        <div id="reset-button">
+            <button onclick="reroll()">섞기</button>
+        </div>
+    </main>
+</body>
+</html>
