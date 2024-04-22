@@ -53,7 +53,7 @@
         window.onload = () => {
             const boardDiv = document.querySelector("#board");
             for(i=0; i<13; i++) {
-                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/back.png>`);
+                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile" ><img src=./img/back.png></div>`);
             }
         }
 
@@ -88,7 +88,7 @@
             boardDiv.innerHTML = "";
 
             tileArr.forEach((tile) => {
-                boardDiv.insertAdjacentHTML("beforeend", `<img class="tile" src=./img/${tileImgList[tile]}>`);
+                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile"><img src=./img/${tileImgList[tile]}></div>`);
             });
         }
     </script>
