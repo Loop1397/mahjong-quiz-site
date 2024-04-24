@@ -50,9 +50,9 @@
             "7z.png"
         ];
         // 현재 패산에 있는 각각의 패가 몇개 남았는지 들어있는 배열
-        const currentDeckCount = Array.from({length: 34}, () => 0);
+        const deckCount = Array.from({length: 34}, () => 0);
         // 현재 패산에 있는 패의 순서(스택형)
-        const currentDeckList = [];
+        const deckList = [];
         // 손에 갖고있는 패
         const handTileArr = [];
         // 왕패(사용되지 않는 14장의 패. 도라 및 뒷도라로 공개될때도 사용 됨)
@@ -75,9 +75,9 @@
         // 피셔-예이츠 셔플 알고리즘 이용
         shuffle = () => {
             // currentDeckCount의 모든 요소를 4로 만듦
-            currentDeckCount.fill(4);
+            deckCount.fill(4);
             // 패산List, 손패, 왕패 배열 초기화
-            currentDeckList.length = 0;
+            deckList.length = 0;
             handTileArr.length = 0;
             kingTileArr.length = 0;
 
@@ -85,38 +85,27 @@
 
             // currentDeckList에 0부터 33까지 4개씩 push함
             for(let i = 0; i < 33 * 4; i++) {
-                currentDeckList.push(Math.floor(i/4));
+                deckList.push(Math.floor(i/4));
             }
-
-            /*
-            while (i < 13) {
-                let draw = getRandomInteger(34);
-
-                if (currentDeckCount[draw] < 4) {
-                    currentDeckCount[draw] += 1;
-                    i += 1;
-                    handTileArr.push(draw);
-                } 
-            }*/
 
             // 피셔-에이츠 셔플 알고리즘으로 패산 섞기
             for(let i = 33 * 4 - 1; i > 0; i--) {
                 const changeNumber = getRandomInteger(i-1);
-                [currentDeckList[i], currentDeckList[changeNumber]] = [currentDeckList[changeNumber], currentDeckList[i]];
+                [deckList[i], deckList[changeNumber]] = [deckList[changeNumber], deckList[i]];
             }
 
             // 14개의 왕패 빼기
             for(let i = 0; i < 14; i++) {
                 // Array.shift : 배열의 맨 앞에서 pop. shift의 반대는 unshift
-                let draw = currentDeckList.shift();
-                currentDeckCount[draw] -= 1;
+                let draw = deckList.shift();
+                deckCount[draw] -= 1;
                 kingTileArr.push(draw);
             }
 
             // 13개의 손패 배부
             for(let i = 0; i < 13; i++) {
-                let draw = currentDeckList.pop();
-                currentDeckCount[draw] -= 1;
+                let draw = deckList.pop();
+                deckCount[draw] -= 1;
                 handTileArr.push(draw);
             }
             
@@ -127,18 +116,28 @@
         }
 
 
-        /* tileChange = (index) => {
+        // 교체할 패를 클릭했을 때의 함수 
+        tileChange = (index) => {
             console.log(index);
 
-            let draw = getRandomInteger(34);
-            handTileArr[index] = ;
-        } */
+            if(deckList.length === 0) {
+                console.log(`패산의 모든 패 소진`);
+                return 0;
+            }
 
-        printDeck = (tileArr) => {
+            let draw = deckList.pop();
+            deckCount[draw] -= 1;
+            handTileArr[index] = draw;
+
+            printDeck(handTileArr.sort((a, b) => a-b));
+            console.log(`남은 패 : ${deckList.length}`);
+        }
+
+        printDeck = (handTileArr) => {
             const boardDiv = document.querySelector("#board");
             boardDiv.innerHTML = "";
 
-            tileArr.forEach((tile, index) => {
+            handTileArr.forEach((tile, index) => {
                 boardDiv.insertAdjacentHTML("beforeend", `<div class="tile"  onclick="tileChange(${index})"><img id="tile${index}" src=./img/${tileImgList[tile]}></div>`);
             });
         }
