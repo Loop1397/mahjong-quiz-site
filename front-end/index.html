@@ -49,6 +49,8 @@
             "6z.png",
             "7z.png"
         ];
+        const currentDeck = Array.from({length: 34}, () => 0);
+        const handTileArr = [];
 
         window.onload = () => {
             const boardDiv = document.querySelector("#board");
@@ -58,8 +60,8 @@
         }
 
         reroll = () => {
-            const tileArr = new Array();
-            const currentDeck = Array.from({length: 34}, () => 0);
+            currentDeck.fill(0);
+            handTileArr.length = 0;
 
             console.log("reroll!!");
 
@@ -70,11 +72,11 @@
                 if (currentDeck[draw] < 4) {
                     currentDeck[draw] += 1;
                     i += 1;
-                    tileArr.push(draw);
+                    handTileArr.push(draw);
                 }
             }
 
-            printDeck(tileArr.toSorted((a, b) => a-b));
+            printDeck(handTileArr.sort((a, b) => a-b));
         }
 
         // 0~ max-1 사이의 정수를 랜덤으로 가져오는 함수
@@ -83,14 +85,21 @@
             return result;
         }
 
+        tileChange = (index) => {
+            console.log(index);
+
+            
+        }
+
         printDeck = (tileArr) => {
             const boardDiv = document.querySelector("#board");
             boardDiv.innerHTML = "";
 
-            tileArr.forEach((tile) => {
-                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile"><img src=./img/${tileImgList[tile]}></div>`);
+            tileArr.forEach((tile, index) => {
+                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile"  onclick="tileChange(${index})"><img id="tile${index}" src=./img/${tileImgList[tile]}></div>`);
             });
         }
+
     </script>
 </head>
 <body>
