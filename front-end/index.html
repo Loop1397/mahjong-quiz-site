@@ -57,25 +57,23 @@
         const handTileArr = [];
         // 왕패(사용되지 않는 14장의 패. 도라 및 뒷도라로 공개될때도 사용 됨)
         const kingTileArr = [];
-        // 패산에서 뽑은 타일
-        let drewTile;
 
         window.onload = () => {
-            const handTileDiv = document.querySelector("#hand-tile");
+            const boardDiv = document.querySelector("#board");
             for(i=0; i<13; i++) {
-                handTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" ><img src=./img/back.png></div>`);
+                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile" ><img src=./img/back.png></div>`);
             }
         }
 
         // 0~ max-1 사이의 정수를 랜덤으로 가져오는 함수
-        const getRandomInteger = (max) => {
+        getRandomInteger = (max) => {
             const result = Math.floor(Math.random() * max);
             return result;
         }
 
         // 패를 섞어 패산을 만하는 함수
         // 피셔-예이츠 셔플 알고리즘 이용
-        const shuffle = () => {
+        shuffle = () => {
             // currentDeckCount의 모든 요소를 4로 만듦
             deckCount.fill(4);
             // 패산List, 손패, 왕패 배열 초기화
@@ -104,80 +102,44 @@
                 kingTileArr.push(draw);
             }
 
-            // 13개의 손패 뽑기
+            // 13개의 손패 배부
             for(let i = 0; i < 13; i++) {
-                handTileArr.push(draw());
+                let draw = deckList.pop();
+                deckCount[draw] -= 1;
+                handTileArr.push(draw);
             }
-            // 추가 한 장 뽑기
-            draw();
             
-            // handTileArr sort함
+            //최종 결과 프린트
             // sort는 배열 내용물 자체를 변환
             // toSorted는 복사한 배열을 반환(원본 배열의 내용은 변하지 않음)
-            handTileArr.sort((a, b) => a-b)
-            printDeck();
+            printDeck(handTileArr.sort((a, b) => a-b));
         }
 
 
         // 교체할 패를 클릭했을 때의 함수 
-        const tileChange = (index) => {
+        tileChange = (index) => {
+            console.log(index);
+
             if(deckList.length === 0) {
                 console.log(`패산의 모든 패 소진`);
                 return 0;
             }
 
-            // index === 13 : 버린 패가 패산에서 마지막으로 뽑은 패일 때
-            // else : 그 외 - 버린 패가 갖고있던 13개의 패 중 하나일 때
-            if(index === 13) {
-                draw();
-            } else {
-                handTileArr[index] = drewTile;
-                
-                handTileArr.sort((a, b) => a-b);
+            let draw = deckList.pop();
+            deckCount[draw] -= 1;
+            handTileArr[index] = draw;
 
-                draw();
-            }
-
-            printDeck();
+            printDeck(handTileArr.sort((a, b) => a-b));
             console.log(`남은 패 : ${deckList.length}`);
         }
 
-        // 패산에서 패를 뽑는 함수
-        // 뽑은 패를 리턴함
-        const draw = () => {
-            let draw = deckList.pop();
-            deckCount[draw] -= 1;
+        printDeck = (handTileArr) => {
+            const boardDiv = document.querySelector("#board");
+            boardDiv.innerHTML = "";
 
-            drewTile = draw;
-            
-            return draw;
-        }
-
-        /**
-        * TODO
-        * [x]: 패산에서 뽑은 패까지 총 14개의 패를 화면에 출력하도록 변경
-        * [ ]: 자신이 버린 패도 보여주도록 변경
-        */
-
-        const printDeck = () => {
-            // id가 hand-tile인 html(여기선 hand-tile인 div) 가져오기
-            const handTileDiv = document.querySelector("#hand-tile");
-            const drewTileDiv = document.querySelector("#drew-tile");
-
-            // style 변경
-           drewTileDiv.style.paddingLeft = "20px";
-
-            // 해당 태그의 내부 html 공백으로 만들기
-            handTileDiv.innerHTML = "";
-            drewTileDiv.innerHTML = "";
-
-            // 손에 있는 13개의 패 출력
             handTileArr.forEach((tile, index) => {
-                handTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(${index})"><img id="tile${index}" src=./img/${tileImgList[tile]}></div>`);
+                boardDiv.insertAdjacentHTML("beforeend", `<div class="tile"  onclick="tileChange(${index})"><img id="tile${index}" src=./img/${tileImgList[tile]}></div>`);
             });
-
-            // 패산에서 뽑은 나머지 한 패 출력
-            drewTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(13)"><img id="tile13" src=./img/${tileImgList[drewTile]}></div>`);
         }
 
     </script>
@@ -188,10 +150,6 @@
     </header>
     <main>
         <div id="board">
-            <div id="hand-tile">
-            </div>
-            <div id="drew-tile">
-            </div>
         </div>
         <div id="shuffle-button">
             <button onclick="shuffle()">섞기</button>
