@@ -20,6 +20,11 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 #hand-tile {
