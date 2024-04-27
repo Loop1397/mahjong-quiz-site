@@ -161,6 +161,7 @@
             // id가 hand-tile인 html(여기선 hand-tile인 div) 가져오기
             const handTileDiv = document.querySelector("#hand-tile");
             const drewTileDiv = document.querySelector("#drew-tile");
+            const remainTileDiv = document.querySelector("#remain-tile");
 
             // style 변경
            drewTileDiv.style.paddingLeft = "20px";
@@ -176,6 +177,9 @@
 
             // 패산에서 뽑은 나머지 한 패 출력
             drewTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(13)"><img id="tile13" src=./img/${tileImgList[drewTile]}></div>`);
+
+            //남은 카드 수 출력
+            remainTileDiv.innerHTML = `<span>남은 패 수 : ${deckList.length}</span>`;
         }
 
     </script>
@@ -185,6 +189,8 @@
         
     </header>
     <main>
+        <div id="remain-tile">
+        </div>
         <div id="board">
             <div id="hand-tile">
             </div>
