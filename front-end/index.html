@@ -162,6 +162,7 @@
             const handTileDiv = document.querySelector("#hand-tile");
             const drewTileDiv = document.querySelector("#drew-tile");
             const remainTileDiv = document.querySelector("#remain-tile");
+            const doraTileDiv = document.querySelector("#dora-tile");
 
             // style 변경
            drewTileDiv.style.paddingLeft = "20px";
@@ -178,8 +179,16 @@
             // 패산에서 뽑은 나머지 한 패 출력
             drewTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(13)"><img id="tile13" src=./img/${tileImgList[drewTile]}></div>`);
 
-            //남은 카드 수 출력
+            //남은 패 수 출력
             remainTileDiv.innerHTML = `<span>남은 패 수 : ${deckList.length}</span>`;
+
+
+            /**
+            * TODO
+            * [ ] : 도라 공개용 div 만들어서 출력 형태 바꾸기
+            */
+            //도라 공개패 출력
+            doraTileDiv.innerHTML = `<span>도라 공개패 : ${kingTileArr[3]}</span>`
         }
 
     </script>
@@ -189,6 +198,8 @@
         
     </header>
     <main>
+        <div id="dora-tile">   
+        </div>
         <div id="remain-tile">
         </div>
         <div id="board">
