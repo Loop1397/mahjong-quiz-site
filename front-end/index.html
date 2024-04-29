@@ -102,12 +102,10 @@
                 kingTileArr.push(draw);
             }
 
-            // 13개의 손패 뽑기
-            for(let i = 0; i < 13; i++) {
+            // 14개의 손패 뽑기
+            for(let i = 0; i < 14; i++) {
                 handTileArr.push(draw());
             }
-            // 추가 한 장 뽑기
-            draw();
             
             // handTileArr sort함
             // sort는 배열 내용물 자체를 변환
@@ -119,20 +117,20 @@
 
         // 교체할 패를 클릭했을 때의 함수 
         const tileChange = (index) => {
+            // 패산에 더이상 뽑을 패가 없으면 아무런 동작을 하지 않음
             if(deckList.length === 0) {
                 console.log(`패산의 모든 패 소진`);
                 return 0;
             }
 
-            // 기존에 갖고있던 패를 버리게 된 경우, 마지막으로 뽑았던 패를 자신의 손 패 안에 넣어서 다시 정렬
-            if(index !== 13) {
-                
-                handTileArr[index] = handTileArr[13];
-                
-                handTileArr.sort((a, b) => a-b);
-            }
+            // 자신이 버린 패를 뽑은 패(손 패의 마지막 패)와 똑같이 만듦
+            handTileArr[index] = handTileArr[13];
+            
+            // 그 후 필요 없어진 뽑은 패(손 패의 마지막 패)를 pop하고, 남은 13개의 손패를 sort함
+            handTileArr.pop();
+            handTileArr.sort((a, b) => a-b);
 
-            draw();
+            handTileArr.push(draw());
 
             printDeck();
             console.log(`남은 패 : ${deckList.length}`);
@@ -143,8 +141,6 @@
         const draw = () => {
             let draw = deckList.pop();
             deckCount[draw] -= 1;
-
-            handTileArr.push(draw);
             
             return draw;
         }
@@ -170,14 +166,13 @@
             drewTileDiv.innerHTML = "";
 
             // 손에 있는 13개의 패 출력
-            handTileArr.forEach((tile, index) => {
-                handTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(${index})"><img id="tile${index}" src=./img/${tileImgList[tile]}></div>`);
-            });
-
-            /*
+            for(let i = 0; i < 13; i++){
+                handTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(${i})"><img id="tile${i}" src=./img/${tileImgList[handTileArr[i]]}></div>`);
+            }
+            
             // 패산에서 뽑은 나머지 한 패 출력
-            drewTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(13)"><img id="tile13" src=./img/${tileImgList[drewTile]}></div>`);
-            */
+            drewTileDiv.insertAdjacentHTML("beforeend", `<div class="tile" onclick="tileChange(13)"><img id="tile13" src=./img/${tileImgList[handTileArr[13]]}></div>`);
+            
 
             //남은 패 수 출력
             remainTileDiv.innerHTML = `<span>남은 패 수 : ${deckList.length}</span>`;
@@ -197,8 +192,7 @@
         */
         
         const checkCard = () => {
-
-            const i = 0;
+            let i = 0;
             while(i < 14) {
                 
             }
