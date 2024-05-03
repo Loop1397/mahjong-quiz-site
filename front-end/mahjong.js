@@ -12,6 +12,7 @@
 // 인자로 몸통이나 머리 등을 뗀 손패 배열, 떼어진 몸통과 머리가 들어간 완성패 배열, 이 들어가야함
 // 처음 전달받는 건 손패 배열과 빈 배열
 const mahjong = (handTileArr, completedTileArr) => {
+    result = [];
     // 먼저 몸통을 뗌
     // 만약 조건이 맞아서 몸통이 떼어질 때마다 처음부터 다시 검사 < 재귀함수
     // 완성 판단? -> 최종적으로 handTileArr.length = 0이되면 완성
@@ -21,7 +22,7 @@ const mahjong = (handTileArr, completedTileArr) => {
     // 국사무쌍은 따로 제작
 
     if (handTileArr.length === 0 && (completedTileArr.length === 5 || completedTileArr.length === 7)){
-        result = completedTileArr;
+        result.push(completedTileArr);
     }
 
     // 커쯔(3개의 같은 패로 이루어진 몸통) 판별
@@ -64,11 +65,13 @@ const mahjong = (handTileArr, completedTileArr) => {
 
 
 
-let result;
+let result = [];
 const arr = [
     [1, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 7, 7, 7],
     [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7],
     [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9],
+    [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5],
+    [1, 1, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9, 9],
     [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5]
 ];
 
