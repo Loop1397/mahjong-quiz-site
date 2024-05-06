@@ -59,7 +59,7 @@
         // 하지만 아래의 코드가 가독성이 더 좋기에 사용. from은 특수한 경우에 사용하니 나중에 찾아보기.
         const deckCount = new Array(38).fill(0);
         // 현재 패산에 있는 패의 순서(스택형)
-        const deckList = [];
+        const deckArr = [];
         // 손에 갖고있는 패
         const handTileArr = [];
         // 왕패(사용되지 않는 14장의 패. 도라 및 뒷도라로 공개될때도 사용 됨)
@@ -88,28 +88,28 @@
             deckCount[20] = 0;
             deckCount[30] = 0;
             // 패산List, 손패, 왕패 배열 초기화
-            deckList.length = 0;
+            deckArr.length = 0;
             handTileArr.length = 0;
             kingTileArr.length = 0;
 
             console.log("shuffle!!");
 
-            // deckList에 0, 10, 20, 30을 제외하고 1부터 37까지 4개씩 push함
+            // deckArr에 0, 10, 20, 30을 제외하고 1부터 37까지 4개씩 push함
             for(let i = 0; i < 38; i++) {
                 if(i%10 !== 0) 
-                    deckList.push(i, i, i, i);
+                    deckArr.push(i, i, i, i);
             }
 
             // 피셔-에이츠 셔플 알고리즘으로 패산 섞기
             for(let i = 34 * 4 - 1; i > 0; i--) {
                 const changeNumber = getRandomInteger(i-1);
-                [deckList[i], deckList[changeNumber]] = [deckList[changeNumber], deckList[i]];
+                [deckArr[i], deckArr[changeNumber]] = [deckArr[changeNumber], deckArr[i]];
             }
 
             // 14개의 왕패 빼기
             for(let i = 0; i < 14; i++) {
                 // Array.shift : 배열의 맨 앞에서 pop. shift의 반대는 unshift
-                let draw = deckList.shift();
+                let draw = deckArr.shift();
                 deckCount[draw] -= 1;
                 kingTileArr.push(draw);
             }
@@ -131,7 +131,7 @@
         // 교체할 패를 클릭했을 때의 함수 
         const tileChange = (index) => {
             // 패산에 더이상 뽑을 패가 없으면 아무런 동작을 하지 않음
-            if(deckList.length === 0) {
+            if(deckArr.length === 0) {
                 console.log(`패산의 모든 패 소진`);
                 return 0;
             }
@@ -146,13 +146,13 @@
             handTileArr.push(draw());
 
             printDeck();
-            console.log(`남은 패 : ${deckList.length}`);
+            console.log(`남은 패 : ${deckArr.length}`);
         }
 
         // 패산에서 패를 뽑는 함수
         // 뽑은 패를 리턴함
         const draw = () => {
-            let draw = deckList.pop();
+            let draw = deckArr.pop();
             deckCount[draw] -= 1;
             
             return draw;
@@ -188,7 +188,7 @@
             
 
             //남은 패 수 출력
-            remainTileDiv.innerHTML = `<span>남은 패 수 : ${deckList.length}</span>`;
+            remainTileDiv.innerHTML = `<span>남은 패 수 : ${deckArr.length}</span>`;
 
 
             /**
