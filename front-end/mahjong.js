@@ -67,7 +67,13 @@ const mahjong = (handTileArr, completedTileArr, cntT, cntO, cntH) => {
     }
 }
 
-
+// 점수(역) 계산 함수
+// 
+const faanCheck = (handCount, cntT, cntO, cntH) => {
+    if (cntT === 4) {
+        return 32000;
+    }
+}
 
 let result = [];
 const arr = [
