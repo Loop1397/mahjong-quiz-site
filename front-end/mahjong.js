@@ -70,7 +70,23 @@ const mahjong = (handTileArr, completedTileArr, cntT, cntO, cntH) => {
 // 점수(역) 계산 함수
 // 
 const faanCheck = (handCount, cntT, cntO, cntH) => {
+
+    // 쓰안커(커쯔가 4개)
     if (cntT === 4) {
+        return 32000;
+    }
+
+    // 녹일색(2/3/4/6/8삭, 발only)
+    // every는 특정 조건에 만족하지 않는 값이 발견되면 순회를 중단하며 false를 반환한다. (전부 만족시 true)
+    const greenOnly = handCount.every((value, index) => {
+        // 2/3/4/6/8삭 및 발은 무조건 true
+        // 그 외의 것들은 if문 안에 들어가서 value를 확인한 뒤, value가 0이 아닌게 하나라도 존재하면 greenOnly는 false가 됨.
+        if(![22, 23, 24, 26, 28, 36].includes(index)) {
+            return value === 0;
+        }
+        return true;
+    })
+    if (greenOnly) {
         return 32000;
     }
 }
