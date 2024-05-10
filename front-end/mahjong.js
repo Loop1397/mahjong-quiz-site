@@ -70,6 +70,7 @@ const mahjong = (handTileArr, completedTileArr, cntT, cntO, cntH) => {
 // 점수(역) 계산 함수
 // 
 const faanCheck = (handCount, cntT, cntO, cntH) => {
+    let faan = 0;
 
     // 쓰안커(커쯔가 4개)
     if (cntT === 4) {
@@ -89,6 +90,13 @@ const faanCheck = (handCount, cntT, cntO, cntH) => {
     if (greenOnly) {
         return 32000;
     }
+
+    // 치또이즈 (머리 7개)
+    if (cntH === 7) {
+        faan += 2;
+    }
+
+    return faan;
 }
 
 let result = [];
