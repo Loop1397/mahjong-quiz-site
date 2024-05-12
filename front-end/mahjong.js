@@ -91,6 +91,17 @@ const faanCheck = (handCount, cntT, cntO, cntH) => {
         return 32000;
     }
 
+    // 자일색(자패 only)
+    const allHonors = handCount.every((value, index) => {
+        if(![31, 32, 33, 34, 35, 36, 37].includes(index)) {
+            return value === 0;
+        }
+        return true;
+    })
+    if (allHonors) {
+        return 32000;
+    }
+
     // 대삼원(백발중 몸통)
     if(handCount[35] === 3 && handCount[36] === 3 && handCount[37] === 3) {
         return 32000;
