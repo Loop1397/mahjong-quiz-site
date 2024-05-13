@@ -102,6 +102,17 @@ const faanCheck = (handCount, cntT, cntO, cntH) => {
         return 32000;
     }
 
+    // 청노두(1, 9 only)
+    const allTerminals = handCount.every((value, index) => {
+        if(![11, 19, 21, 29, 31, 39].includes(index)) {
+            return value === 0;
+        }
+        return true;
+    })
+    if (allTerminals) {
+        return 32000;
+    }
+
     // 대삼원(백발중 몸통)
     if(handCount[35] === 3 && handCount[36] === 3 && handCount[37] === 3) {
         return 32000;
