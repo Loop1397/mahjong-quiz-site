@@ -113,6 +113,11 @@ const faanCheck = (handCount, cntT, cntO, cntH) => {
         return 32000;
     }
 
+    // 대사희(동서남북 몸통)
+    if(handCount[31] === 3 && handCount[32] === 3 && handCount[33] === 3 && handCount[34]) {
+        return 32000;
+    }
+
     // 대삼원(백발중 몸통)
     if(handCount[35] === 3 && handCount[36] === 3 && handCount[37] === 3) {
         return 32000;
