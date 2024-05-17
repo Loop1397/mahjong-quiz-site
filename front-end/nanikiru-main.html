@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/nanikiru-main.css">
+    <script>
+        window.onload = () => {
+            const contentWrapperDiv = document.querySelector(".content-wrapper");
+            // 앞으로 생성될 보드 정보가 들은 배열
+            const boards = [1, 2, 3];
+            for(i=0; i<boards.length; i++) {
+                contentWrapperDiv.insertAdjacentHTML("beforeend", 
+                `<div class="board-wrapper">
+                    <div class="board"></div>
+                </div>`);
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="page-wrapper">
         <div class="content-wrapper">
-            <div class="board-wrapper">
-                <div class="board"></div>
-            </div>
-            <div class="board-wrapper">
-                <div class="board"></div>
-            </div>
-            <div class="board-wrapper">
-                <div class="board"></div>
-            </div>
+            <header></header>
+            <footer></footer>
         </div>
     </div>
 </body>
