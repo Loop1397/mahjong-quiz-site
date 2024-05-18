@@ -8,7 +8,14 @@
     height: auto;
     background-color: beige;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width:498px;
+    height: 100px;
+    background-color: burlywood;
 }
 
 .content-wrapper {
@@ -33,4 +40,10 @@
     height: 100%;
     border-radius: 20px;
     background-color: white;
+}
+
+footer {
+    width:498px;
+    height: 100px;
+    background-color: burlywood;
 }
