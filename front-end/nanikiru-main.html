@@ -9,13 +9,14 @@
         window.onload = () => {
             const contentWrapperDiv = document.querySelector(".content-wrapper");
             // 앞으로 생성될 보드 정보가 들은 배열
+            // 게시글 번호, 국, 순, 가, 도라
             const boards = [1, 2, 3];
-            for(i=0; i<boards.length; i++) {
+            boards.forEach(e => {
                 contentWrapperDiv.insertAdjacentHTML("beforeend", 
                 `<div class="board-wrapper">
                     <div class="board"></div>
                 </div>`);
-            }
+            });
         }
     </script>
 </head>
@@ -23,6 +24,9 @@
     <div class="page-wrapper">
         <header></header>
         <div class="content-wrapper">
+            <button>
+                <span></span>
+            </button>
         </div>
         <footer></footer>
     </div>
