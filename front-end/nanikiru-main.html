@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="./css/nanikiru-main.css">
     <script>
         window.onload = () => {
-            const contentWrapperDiv = document.querySelector(".content-wrapper");
+            const contentWrapperDiv = document.querySelector(".board-wrapper");
             // 앞으로 생성될 보드 정보가 들은 배열
             // 게시글 번호, 국, 순, 가, 도라
             const boards = [1, 2, 3];
             boards.forEach(e => {
                 contentWrapperDiv.insertAdjacentHTML("beforeend", 
-                `<div class="board-wrapper">
-                    <div class="board"></div>
+                `<div class="board">
+                    <div class="tiles"></div>
                 </div>`);
             });
         }
@@ -22,13 +22,15 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <header></header>
         <div class="content-wrapper">
-            <button>
-                <span></span>
-            </button>
+            <header></header>
+            <div class="board-wrapper">
+                <button>
+                    <span></span>
+                </button>
+            </div>
+            <footer></footer>
         </div>
-        <footer></footer>
     </div>
 </body>
 </html>

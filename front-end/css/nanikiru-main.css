@@ -12,12 +12,6 @@
     align-items: center;
 }
 
-header {
-    width:498px;
-    height: 100px;
-    background-color: burlywood;
-}
-
 .content-wrapper {
     width: 498px;
     min-height: 1080px;
@@ -28,14 +22,25 @@ header {
     align-items: center;
 }
 
+header {
+    width:100%;
+    height: 100px;
+    background-color: burlywood;
+}
+
 .board-wrapper {
-    width:498px;
+    width: 100%;
+    height: auto;
+}
+
+.board {
+    width:100%;
     height: 240px;
     padding: 10px 20px;
     background-color: gray;
 }
 
-.board {
+.tiles {
     width: 100%;
     height: 100%;
     border-radius: 20px;
