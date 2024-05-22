@@ -14,7 +14,7 @@
             boards.forEach(e => {
                 contentWrapperDiv.insertAdjacentHTML("beforeend", 
                 `<div class="board">
-                    <div class="tiles"></div>
+                    <div class="board-content"></div>
                 </div>`);
             });
         }
@@ -25,6 +25,15 @@
         <div class="content-wrapper">
             <header></header>
             <div class="board-wrapper">
+                <div class="board">
+                    <div class="board-content">
+                        <div class="board-title">
+                            <p>문제 번호 동1국 3순 도라패</p>
+                            <p>제작자 코멘트 : </p>
+                        </div>
+                        <div class="tiles"></div>
+                    </div>
+                </div>
                 <button>
                     <span></span>
                 </button>
