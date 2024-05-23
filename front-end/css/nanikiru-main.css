@@ -47,6 +47,19 @@ header {
     background-color: white;
 }
 
+.tiles {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.tile {
+    width:50px;
+    height: 80.6px;
+    background-color: green;
+}
+
 footer {
     width:498px;
     height: 100px;
